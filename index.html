@@ -18,14 +18,14 @@
         const walletAddress = document.getElementById('walletAddress');
         if (window.ethereum) {
                             const provider = new ethers.providers.Web3Provider(window.ethereum);
-                    await provider.send("eth_requestAccounts", []); // Demande la connexion du compte
+                    provider.send("eth_requestAccounts", []); // Demande la connexion du compte
                     const signer = provider.getSigner();
         // Fonction pour se connecter à MetaMask
         async function connectWallet() {
              // Vérifie si MetaMask est installé
                 try {
 
-                    const address = await signer.getAddress();
+                    const address = signer.getAddress();
                     walletAddress.textContent = `Adresse du portefeuille : ${address}`;
                 } catch (error) {
                     console.error("Erreur de connexion au portefeuille", error);
