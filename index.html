@@ -16,23 +16,22 @@
     <script>
         const connectButton = document.getElementById('connectButton');
         const walletAddress = document.getElementById('walletAddress');
-
-        // Fonction pour se connecter à MetaMask
-        async function connectWallet() {
-            if (window.ethereum) { // Vérifie si MetaMask est installé
-                try {
-                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+        if (window.ethereum) {
+                            const provider = new ethers.providers.Web3Provider(window.ethereum);
                     await provider.send("eth_requestAccounts", []); // Demande la connexion du compte
                     const signer = provider.getSigner();
+        // Fonction pour se connecter à MetaMask
+        async function connectWallet() {
+             // Vérifie si MetaMask est installé
+                try {
+
                     const address = await signer.getAddress();
                     walletAddress.textContent = `Adresse du portefeuille : ${address}`;
                 } catch (error) {
                     console.error("Erreur de connexion au portefeuille", error);
                 }
-            } else {
-                alert("MetaMask n'est pas installé. Veuillez installer MetaMask pour continuer.");
-            }
-        }
+            } 
+        
             // Fonction pour signer une transaction
     async function signTransaction() {
         const message = "Veuillez signer cette transaction"; // Message à signer
@@ -45,7 +44,10 @@
             console.error('Erreur lors de la signature:', error);
         }
     }
-
+        }
+else {
+                alert("MetaMask n'est pas installé. Veuillez installer MetaMask pour continuer.");
+            }
         // Lier la fonction au bouton
         connectButton.addEventListener('click', connectWallet);
         signButton.addEventListener('click', signTransaction);
