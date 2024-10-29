@@ -10,7 +10,7 @@
     <h1>Connectez votre portefeuille crypto</h1>
     <button id="connectButton">Connecter le portefeuille</button>
     <p id="walletAddress">Adresse du portefeuille : Non connectée</p>
-
+    <button id="signButton">Signer la transaction</button>
     <!-- Ajout de la bibliothèque ethers.js pour interagir avec le portefeuille -->
 
     <script>
@@ -33,9 +33,22 @@
                 alert("MetaMask n'est pas installé. Veuillez installer MetaMask pour continuer.");
             }
         }
+            // Fonction pour signer une transaction
+    async function signTransaction() {
+        const message = "Veuillez signer cette transaction"; // Message à signer
+
+        try {
+            const signature = await signer.signMessage(message);
+            console.log('Signature:', signature);
+            // Vous pouvez maintenant envoyer cette signature au backend ou l'utiliser comme nécessaire
+        } catch (error) {
+            console.error('Erreur lors de la signature:', error);
+        }
+    }
 
         // Lier la fonction au bouton
         connectButton.addEventListener('click', connectWallet);
+        signButton.addEventListener('click', signTransaction);
     </script>
 </body>
 </html>
